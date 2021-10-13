@@ -1,0 +1,37 @@
+databaseChangeLog:
+        - changeSet:
+                id: 202010-001
+                author: daniel@drcdbatecnologia.com.br
+                context: prd,stg,dev
+                comment: Teste de automatização do Liquibase
+                changes:
+                        - createTable:
+                                remarks: Tabela de teste
+                                schemaName: public
+                                tableName: teste
+                                columns:
+                                        - column:
+                                                remarks: PK da tabela
+                                                name: id
+                                                type: bigint
+                                                autoIncrement: true
+                                                constraints:
+                                                        nullable: false
+                                                        primaryKey: true
+                                        - column:
+                                                remarks: Campos de valor
+                                                name: valor
+                                                type: varchar(100)
+                                                constraints:
+                                                        nullable: false
+                                        - column:
+                                                remarks: Data de inserção do registro
+                                                name: created_at
+                                                type: timestamp
+                                                defaultValueDate: now()
+                                                constraints:
+                                                        nullable: false
+        - rollback:
+                - dropTable:
+                        schemaName: public
+                        tableName: teste
